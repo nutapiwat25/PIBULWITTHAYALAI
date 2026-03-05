@@ -1,0 +1,457 @@
+/* ============================================================
+   1. VARIABLES & BASE STYLES
+   ============================================================ */
+:root {
+    --gov-green: #006400; /* สีเขียวเข้มราชการ */
+    --gov-red: #8b0000;   /* สีแดงเลือดหมู */
+    --gold: #ffd700;      /* สีทองตัดขอบ */
+    --bg-light: #f4f4f4;  /* สีพื้นหลังเทาอ่อน */
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: var(--bg-light);
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    min-height: 80vh;
+}
+
+/* ============================================================
+   2. HEADER & NAVIGATION
+   ============================================================ */
+.header {
+    background-color: var(--gov-green);
+    color: var(--white);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid var(--gov-red);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.brand { display: flex; align-items: center; gap: 15px; }
+
+.school-logo {
+    width: 60px; height: 60px;
+    background: var(--white);
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: contain;
+}
+
+.school-name-wrapper { display: flex; flex-direction: column; line-height: 1.2; }
+.en-name { font-weight: bold; font-size: 1.2rem; }
+.th-name { font-size: 0.9rem; opacity: 0.9; }
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    padding: 8px 12px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: var(--gov-red);
+    border-radius: 4px;
+}
+
+/* ============================================================
+   3. COMPONENTS (BUTTONS, CARDS, FORMS)
+   ============================================================ */
+.btn, .btn-back {
+    background-color: var(--gov-green);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.btn-back { background-color: #666; margin-bottom: 20px; }
+.btn:hover { background-color: #007500; transform: translateY(-2px); }
+.btn-back:hover { background-color: #444; }
+
+/* Grid System (Page 3/7) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.card .img-box {
+    width: 100%;
+    height: 160px;
+    background: #eee;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.card .student-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000;
+    margin: 8px 0;
+    line-height: 1.4;
+    white-space: normal; 
+    word-wrap: break-word;
+    min-height: 3em;
+    display: block;
+}
+
+/* ============================================================
+   4. PROFILE DETAIL (Page 5/8) - ปรับปรุงเพื่อความสวยงาม
+   ============================================================ */
+.profile-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column; /* พื้นฐานให้เรียงลงมา */
+    gap: 25px;
+}
+
+/* ส่วนบน: รูปและข้อมูลพื้นฐาน */
+.profile-main-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+/* กล่องเก็บรูป */
+.profile-img-box {
+    width: 300px;         /* กำหนดความกว้างสูงสุดที่ต้องการ */
+    height: auto;          /* ให้ความสูงยืดตามรูปจริง */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;   /* ใส่ขอบมนตามดีไซน์เดิม */
+    background: #f0f0f0;   /* สีพื้นหลังกรณีรูปเล็กกว่ากล่อง */
+    border: 3px solid var(--gov-green);
+    flex-shrink: 0;
+}
+
+/* ตัวรูปภาพ */
+#profile-img {
+    width: 100%;           /* ให้กว้างเต็มกล่อง */
+    height: auto;          /* สำคัญมาก: ให้ความสูงปรับตามสัดส่วนรูปจริง (ไม่ซูม) */
+    display: block;
+    object-fit: contain;   /* ถ้าสัดส่วนรูปไม่พอดีกล่อง จะโชว์รูปเต็มใบโดยไม่ตัดส่วนไหนออก */
+}
+
+.profile-details { flex-grow: 1; }
+.profile-details h2 {
+    color: var(--black);
+    font-size: 2rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* ส่วนล่าง: ความในใจ */
+.profile-footer-content {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.profile-footer-content .quote-container {
+    border-left: 5px solid var(--gov-red);
+    padding: 20px;
+    background: #fff9f9;
+    border-radius: 0 10px 10px 0;
+    width: 100%;
+    word-wrap: break-word;     /* แก้ไขข้อความเกินกรอบ */
+    overflow-wrap: break-word;
+}
+
+#profile-msg {
+    font-style: italic;
+    color: #333;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    display: block;
+}
+
+/* ============================================================
+   5. PHOTO GALLERY (MASONRY)
+   ============================================================ */
+.photo-masonry-full {
+    column-count: 4;
+    column-gap: 10px;
+    width: 100%;
+}
+
+.photo-item-full {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    break-inside: avoid;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.photo-item-full img {
+    width: 100%; height: auto; display: block;
+    transition: 0.3s ease;
+}
+
+.photo-item-full img:hover { transform: scale(1.05); }
+
+/* ============================================================
+   6. RESPONSIVE DESIGN (โทรศัพท์และแท็บเล็ต)
+   ============================================================ */
+
+/* สำหรับแท็บเล็ต (หน้าจอไม่เกิน 1024px) */
+@media (max-width: 1024px) {
+    .photo-masonry-full { column-count: 3; }
+}
+
+/* สำหรับโทรศัพท์ (หน้าจอไม่เกิน 768px) */
+@media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: row !important; /* บังคับให้เรียงแนวนอน ไม่ต้องเรียงลงมา */
+        justify-content: space-between; /* โลโก้อยู่ซ้าย ปุ่มอยู่ขวา */
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    .menu-toggle {
+        display: flex; /* แสดงปุ่มสามขีดเฉพาะในมือถือ */
+        order: 2;      /* มั่นใจว่าอยู่ฝั่งขวา */
+    }
+
+    /* ซ่อนเมนูไว้ก่อน และให้กางลงมาเมื่อกด */
+    .nav-links {
+        display: none; 
+        position: absolute;
+        top: 70px; /* ปรับให้พอดีใต้แถบ Header */
+        left: 0;
+        width: 100%;
+        background-color: var(--gov-green);
+        flex-direction: column;
+        z-index: 1000;
+    }
+
+    /* เมื่อกดปุ่มแล้วให้เมนูแสดงผล */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } /* หน้าทำเนียบ 2 คอลัมน์ */
+
+    /* หน้าข้อมูลรายคน: ปรับเป็นแนวตั้งและอยู่ตรงกลางทั้งหมด */
+    .profile-main-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-img-box {
+        width: 220px;
+        height: 300px;
+        margin-bottom: 10px;
+    }
+
+    .profile-details h2 { font-size: 1.5rem; }
+
+    .photo-masonry-full { column-count: 2; }
+}
+
+/* สำหรับมือถือจอเล็กมาก (หน้าจอไม่เกิน 480px) */
+@media (max-width: 480px) {
+    .photo-masonry-full { column-count: 2; }
+}
+/* --- สไตล์ปุ่มสามขีด --- */
+.menu-toggle {
+    display: none; /* ซ่อนไว้ในหน้าจอคอม */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--white);
+    transition: 0.3s;
+}
+
+/* --- จัดการเมนูในมือถือ --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* แสดงปุ่มสามขีดในมือถือ */
+    }
+
+    .nav-links {
+        display: none; /* ซ่อนเมนูไว้ก่อน */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* ให้กางลงมาใต้ Header */
+        left: 0;
+        width: 100%;
+        background-color: var(--gov-green);
+        border-bottom: 5px solid var(--gov-red);
+        padding: 20px 0;
+        z-index: 999;
+    }
+
+    /* คลาสที่จะถูกเติมด้วย JavaScript เมื่อกดปุ่ม */
+    .nav-links.active {
+        display: flex; 
+    }
+
+    .nav-links a {
+        margin: 0;
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+}
+.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+/* 7. Forms & Tables (สำหรับหน้า 4 และ 6) */
+.form-card {
+    max-width: 600px;
+    margin: auto;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--gov-green); /* แถบสีเขียวด้านบน */
+}
+
+.form-group { 
+    margin-bottom: 15px; 
+}
+
+.form-group label { 
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.table-responsive {
+    overflow-x: auto; /* ทำให้เลื่อนซ้าย-ขวาได้ในมือถือ */
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* บังคับความกว้างขั้นต่ำของตาราง */
+}
+
+th { 
+    background: #eee; 
+    padding: 15px; 
+    text-align: left; 
+    border-bottom: 2px solid #ddd; 
+}
+
+td { 
+    padding: 15px; 
+    border-bottom: 1px solid #eee; 
+}
+.btn {
+    background-color: var(--gov-green);
+    color: var(--white);
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 3px solid #004400;
+    transition: 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #007500;
+    transform: translateY(-2px);
+}
+/* จัดการตารางและฟอร์มในมือถือ  */
+@media (max-width: 768px) {
+    .form-card {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    /* ทำให้ตารางในหน้า 6 อ่านง่ายขึ้น */
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 10px;
+    }
+
+    /* ปุ่มในมือถือให้กว้างเต็ม */
+    .form-card .btn, .form-card .btn-back {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+/* เพิ่มส่วนนี้ในไฟล์ style.css ของคุณ */
+table td {
+    word-wrap: break-word;       /* ตัดคำที่ยาวเกินไป */
+    overflow-wrap: break-word;    /* รองรับเบราว์เซอร์สมัยใหม่ */
+    white-space: normal;         /* อนุญาตให้ข้อความไหลลงบรรทัดใหม่ (สำคัญมาก) */
+    vertical-align: top;         /* ให้ข้อความเริ่มจากด้านบนของช่อง */
+    min-width: 200px;            /* กำหนดความกว้างขั้นต่ำของช่องข้อความ */
+    line-height: 1.6;            /* เพิ่มระยะห่างบรรทัดให้อ่านง่ายขึ้น */
+}

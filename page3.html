@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pibulwitthayalai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+<div class="container">
+    <button class="btn-back" onclick="location.href='page2.html'">← ย้อนกลับไปเลือกรุ่น</button>
+    <h2 style="text-align:center; color:var(--gov-green); margin-bottom: 30px;">ทำเนียบนักเรียน รุ่น 126</h2>
+    
+    <div id="student-grid" class="grid"></div>
+</div>
+
+<script src="studentData.js"></script>
+<script src="navbar.js"></script>
+<script>
+    const grid = document.getElementById('student-grid');
+    if (grid && allStudents["126"]) {
+        allStudents["126"].forEach(std => {
+            // ในส่วนที่แสดงผล Grid ในหน้า page3.html หรือ page7.html
+grid.innerHTML += `
+    <div class="card" onclick="location.href='page5.html?id=${std.id}'">
+        <div class="img-box">
+            <img src="รุ่น126/${std.img}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='รุ่น126/default.jpg'">
+        </div>
+        <div class="card-content">
+            <div class="student-name">${std.name.replace(' ', '<br>')}</div>
+            <div class="student-info">ห้อง ${std.room}</div>
+            <div class="student-info" style="font-size: 0.75rem;">รุ่น 126</div>
+        </div>
+    </div>`;
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pibulwitthayalai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+
+    <div class="full-width-gallery">
+    <h2 style="text-align:center; padding: 20px 0; color: var(--gov-green);">คลังภาพความทรงจำ</h2>
+    <div id="photo-gallery" class="photo-masonry-full"></div>
+    </div>
+</body>
+</html>
+
+<script src="photos.js"></script>
+<script src="navbar.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const gallery = document.getElementById('photo-gallery');
+    
+    // 1. เช็กตัวแปร photoFiles
+    if (typeof photoFiles === 'undefined' || !photoFiles || photoFiles.length === 0) {
+        console.error("หาตัวแปร photoFiles ไม่เจอ หรือไม่มีข้อมูลใน photos.js");
+        gallery.innerHTML = "<p style='text-align:center;'>ไม่พบไฟล์รูปภาพในระบบ</p>";
+        return;
+    }
+
+    // 2. แสดงผลเรียงตามลำดับใน photos.js ทันที
+    // ใช้ Path 'รูปหน้าหลัก/' ตามที่คุณตั้งไว้
+    gallery.innerHTML = photoFiles.map(fileName => `
+        <div class="photo-item-full">
+            <img src="รูปหน้าหลัก/${fileName}" 
+                 alt="School Memory" 
+                 onerror="console.warn('หาไฟล์ไม่เจอ:', '${fileName}'); this.parentElement.style.display='none';">
+        </div>
+    `).join('');
+});
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pibulwitthayalai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+
+    <script src="navbar.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', loadMessages);</script>
+</body>
+</html>
+<div class="container">
+    <button class="btn-back" onclick="history.back()" style="margin-top:20px;">ย้อนกลับ</button>
+    <h2 style="color:var(--gov-green); margin-bottom:20px;">รวมความในใจ</h2>
+    
+    <div class="table-responsive">
+        <table style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background:#eee;">
+                    <th style="padding:10px; border:1px solid #ddd;">ชื่อ</th>
+                    <th style="padding:10px; border:1px solid #ddd;">รุ่น</th>
+                    <th style="padding:10px; border:1px solid #ddd;">ความในใจ</th>
+                </tr>
+            </thead>
+            <tbody id="cloud-data">
+                <tr><td colspan="3" style="text-align:center; padding:20px;">กำลังโหลดข้อมูล...</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbymYdAeQHf7IqTO5EAQiAlRUx4jlHPcng9BNcZb5Z_AaIlq2yH6AEhOTZx3PEsxjRJKAQ/exec';
+
+    function loadCloudData() {
+        fetch(scriptURL)
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('cloud-data');
+                tbody.innerHTML = '';
+                data.reverse().forEach(item => { // เอาข้อมูลล่าสุดขึ้นก่อน
+                    tbody.innerHTML += `
+                        <tr>
+            <td style="padding:10px; border:1px solid #ddd;">${item.name}</td>
+            <td style="padding:10px; border:1px solid #ddd; text-align:center;">${item.gen}</td>
+            
+            <td style="padding:10px; border:1px solid #ddd; white-space: normal; word-break: break-word;">
+                ${item.message}
+            </td>
+        </tr>
+                    `;
+                });
+            })
+            .catch(err => {
+                document.getElementById('cloud-data').innerHTML = '<tr><td colspan="3">โหลดข้อมูลล้มเหลว</td></tr>';
+            });
+    }
+
+    // เรียกโหลดข้อมูลทันทีที่เปิดหน้า
+    window.onload = loadCloudData;
+</script>

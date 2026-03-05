@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pibulwitthayalai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="navbar-container"></div>
+<div class="container">
+    <button class="btn-back" onclick="history.back()">← ย้อนกลับ</button>
+
+    <div class="profile-card">
+        <div class="profile-main-content">
+            <div class="profile-img-box">
+                <img id="profile-img" src="" alt="รอรูป">
+            </div>
+            
+            <div class="profile-details">
+                <h2 id="profile-name"></h2>
+                <div class="info-list">
+                    <p><strong>ชื่อ-นามสกุล:</strong> <span id="display-name"></span></p>
+                    <p><strong>ชื่อเล่น:</strong> <span id="profile-nickname"></span></p>
+                    <p><strong>เลขประจำตัว:</strong> <span id="profile-number"></span></p>
+                    <p><strong>วันเกิด:</strong> <span id="profile-birthday"></span></p>
+                    <p><strong>ห้อง:</strong> <span id="profile-room"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-footer-content">
+            <p class="footer-title">ความในใจ:</p>
+            <div class="quote-container">
+                <p id="profile-msg"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="studentData.js"></script>
+<script src="navbar.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const stdId = urlParams.get('id');
+    let student = null;
+
+    Object.values(allStudents).forEach(list => {
+        const found = list.find(s => s.id === stdId);
+        if (found) student = found;
+    });
+
+    if (student) {
+        // ใส่ข้อมูลลงใน ID ต่างๆ ที่กำหนดไว้
+        document.getElementById('profile-name').innerText = student.name;
+        document.getElementById('display-name').innerText = student.name;
+        document.getElementById('profile-nickname').innerText = student.nickname || "-";
+        document.getElementById('profile-number').innerText = student.number || "-";
+        document.getElementById('profile-birthday').innerText = student.birthday || "-";
+        document.getElementById('profile-room').innerText = student.room;
+        document.getElementById('profile-msg').innerText = student.msg;
+        
+        // ดึงรูปภาพจากโฟลเดอร์ "รูป"
+        document.getElementById('profile-img').src = "รุ่น127/" + student.img2;
+    }// ในส่วน Script หน้า 5/8
+    if (student) {
+    const msgEl = document.getElementById('profile-msg');
+    if (msgEl) {
+        msgEl.innerText = student.msg; // ใช้ innerText จะช่วยเรื่องการตัดคำได้ดีกว่า
+    }
+}
+</script>
+</body>
+</html>
